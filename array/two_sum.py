@@ -49,5 +49,5 @@ class Solution:
 
 
 class Main:
-    list = Solution.twoSum(Solution(), [2,7,11,15], 9)
+    list = Solution.twoSum(Solution(), [3,3],6)
     print(list)
