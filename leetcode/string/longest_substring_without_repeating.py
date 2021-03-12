@@ -23,7 +23,10 @@
 #符，就需要缩小左边界，直到重复的字符移出了左边界，然后继续移动滑动窗口的右边界。以此类推，
 #每次移动需要计算当前⻓度，并判断是否需要更新最大⻓度，最终最大的值就是题目中的所求。
 
-
+#在第一次遇到重复字母时，假设串已达到最大，那么需要舍弃该字母的串的部分，假设该重复字母的位置为k，1到k-1的部分
+#在当前势必已经最长，它的子串无论如何都会遇到k，并终止增加长度，所以，要将与K位置重叠的字母的位置找出来，从它的下
+#一个开始，这样就能越过K，继续找寻最大的可能性了。这样做的代价是：无重复的字符也被滑出去了，长度一直在减，但因为你
+#已经记录了最大长度，所以再继续寻找新的可能性就行了。
 
 #python中的方法和数据默认都是public类型的，此时方法和变量名前面都没有下划线
 #public可以被子类，类内外访问
@@ -49,17 +52,20 @@ class Solution:
         result = 0
         left = 0
         right = -1
-        #遍历整个字符串
-        while left < len(s):
+        #遍历整个字符串，右窗口应该到最后一个时，左窗口应该只能到倒数第二个，负责nextIndex会越界
+        while left < len(s)-1:
             #窗口开始滑动
-            #如果右index+1小于长度，而且该字符的ascii码-a的ascii码位置上值为0，代码无重复。
-            if right + 1 < len(s) and freq[ord(s[right + 1]) - ord('a')]== 0:
+            nextIndex = right + 1
+            #计算当前字符下标，相对于a的偏移量
+            charIndex = ord(s[nextIndex]) - ord('a')
+            #如果右index+1小于长度，而且该字符的ascii码-a的ascii码位置上值为0，字母无重复。
+            if nextIndex < len(s) and freq[charIndex]== 0:
                 #那么该位置+1
-                freq[ord(s[right + 1]) - ord('a')] += 1
+                freq[charIndex] += 1
                 #窗口右边进1
                 right += 1
             else:
-                #否则，该位置置为0
+                #否则，左边位置-1开始往出滑，直到重复字符滑出去，来寻求一个可能性，由特殊来寻找一般
                 freq[ord(s[left]) - ord('a')] -= 1
                 #窗口左边进1
                 left += 1
@@ -72,6 +78,8 @@ class Solution:
         if a > b:
             return a
         return b
+
+
 class Main:
-    list = Solution.lengthOfLongestSubstring(Solution(), 'pwwkew')
+    list = Solution.lengthOfLongestSubstring(Solution(), 'abcabcbb')
     print(list)
