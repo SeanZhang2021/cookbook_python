@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 #Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent.
- #A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+#A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
 
-# 
+#
 #Input: "23"
 #Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 #
@@ -21,19 +21,27 @@
 #man1 = Man("吕子乔"， "四川省")
 #man1.myself()
 
+
 class Solution:
-    staticName = 'zhangxiang'
-    def __init__(self,name,place) -> None:
+    #list,map访问数据的方式
+    staticName = [
+        ' ', '  ', 'abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz'
+    ]
+    map = {'ss': 'ss'}
+
+    def __init__(self, name, place) -> None:
         self.name = name
         self.place = place
 
     def letterCombinations(self, s: str) -> int:
         return len(self.name)
 
-    def findCombinations(self, digits:str,index:int,s:str)->int:
+    def findCombinations(self, digits: str, index: int, s: str) -> None:
         return 1
 
+
 class Main:
-    list = Solution.letterCombinations(Solution('tt','ttt'), 'abcabcbb')
+    list = Solution.letterCombinations(Solution('tt', 'ttt'), 'abcabcbb')
     print(list)
     print(Solution.staticName)
+    print(Solution.map['ss'])
