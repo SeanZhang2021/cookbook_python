@@ -71,6 +71,7 @@ class Solution:
                 left += 1
             #每滑动一次，比较一下最长长度。
             result = max(result, right - left + 1)
+                     
         #循环结束，返回值
         return result
 
@@ -78,7 +79,7 @@ class Solution:
         if a > b:
             return a
         return b
-
+ 
 
 class Main:
     list = Solution.lengthOfLongestSubstring(Solution(), 'abcabcbb')
