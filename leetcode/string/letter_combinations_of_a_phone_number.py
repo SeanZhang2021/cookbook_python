@@ -42,6 +42,7 @@ class Solution:
 
     # 经过一段思考，发现，这其实是个n乘n乘n的问题，也就是树状结构，每一条路的组合构成了一个结果。所以遍历树
     # 即可得出结论。递归遍历树，每进入一层就传入上一层的结果，直到最后一层叶子节点，记录结果，
+    # n*n*n的问题都可以归结于树的分叉遍历问题，用树来组织各种情况。
     def findCombinations(self, digits: list, index: int, s: str):
         if index == len(digits):
             # list添加新元素是append而不是add
